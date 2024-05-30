@@ -1,4 +1,4 @@
-package hellofx;
+package schoolmanagement;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -10,14 +10,8 @@ import java.io.FileWriter;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,7 +45,6 @@ public class Main extends Application {
   public void start(Stage primaryStage) throws IOException {
     studentList = readDataFromFile();
 
-    Parent root = FXMLLoader.load(getClass().getResource("hellofx.fxml"));
     primaryStage.setTitle("Student Management System");
 
     // Create table to display the Student records
@@ -75,7 +68,7 @@ public class Main extends Application {
     gradeColumn.setCellValueFactory(cellData -> cellData.getValue().gradeProperty());
     tableView.getColumns().add(gradeColumn);
 
-    // Adding a button to each row int he table viw details
+    // Adding a button to each row in the table view details
     TableColumn<Student, Void> detailsColumn = new TableColumn<>("Details");
     detailsColumn.setCellFactory(param -> new TableCell<Student, Void>() {
       private final Button detailsButton = new Button("View Details");
@@ -339,67 +332,6 @@ public class Main extends Application {
       file.createNewFile();
     }
     return tempList;
-  }
-
-  public static class Student {
-    private final StringProperty name = new SimpleStringProperty();
-    private final StringProperty id = new SimpleStringProperty();
-    private final StringProperty course = new SimpleStringProperty();
-    private final DoubleProperty grade = new SimpleDoubleProperty(0.0);
-
-    public Student(String name, String id, String course) {
-      setName(name);
-      setId(id);
-      setCourse(course);
-    }
-
-    public StringProperty nameProperty() {
-      return name;
-    }
-
-    public StringProperty idProperty() {
-      return id;
-    }
-
-    public StringProperty courseProperty() {
-      return course;
-    }
-
-    public String getName() {
-      return name.get();
-    }
-
-    public void setName(String name) {
-      this.name.set(name);
-    }
-
-    public String getId() {
-      return id.get();
-    }
-
-    public void setId(String id) {
-      this.id.set(id);
-    }
-
-    public String getCourse() {
-      return course.get();
-    }
-
-    public void setCourse(String course) {
-      this.course.set(course);
-    }
-
-    public DoubleProperty gradeProperty() {
-      return grade;
-    }
-
-    public double getGrade() {
-      return grade.get();
-    }
-
-    public void setGrade(double grade) {
-      this.grade.set(grade);
-    }
   }
 
   public static void main(String[] args) {
